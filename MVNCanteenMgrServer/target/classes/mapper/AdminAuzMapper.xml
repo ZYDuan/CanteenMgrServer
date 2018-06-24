@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.AdminAuzMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.AdminAuz" >
+    <constructor >
+      <idArg column="auz_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="auz_level" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin_auz
+    where auz_id = #{auzId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.AdminAuz" >
+    insert into admin_auz (auz_id, auz_level)
+    values (#{auzId,jdbcType=INTEGER}, #{auzLevel,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.AdminAuz" >
+    update admin_auz
+    set auz_level = #{auzLevel,jdbcType=INTEGER}
+    where auz_id = #{auzId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select auz_id, auz_level
+    from admin_auz
+    where auz_id = #{auzId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select auz_id, auz_level
+    from admin_auz
+  </select>
+</mapper>

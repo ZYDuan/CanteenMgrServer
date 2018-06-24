@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.StudentDataMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.StudentData" >
+    <constructor >
+      <idArg column="sd_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="stu_uq_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="stu_info" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="stu_finger" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student_data
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.StudentData" >
+    insert into student_data (sd_id, stu_uq_id, stu_info, 
+      stu_finger)
+    values (#{sdId,jdbcType=INTEGER}, #{stuUqId,jdbcType=VARCHAR}, #{stuInfo,jdbcType=INTEGER}, 
+      #{stuFinger,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.StudentData" >
+    update student_data
+    set stu_uq_id = #{stuUqId,jdbcType=VARCHAR},
+      stu_info = #{stuInfo,jdbcType=INTEGER},
+      stu_finger = #{stuFinger,jdbcType=VARCHAR}
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select sd_id, stu_uq_id, stu_info, stu_finger
+    from student_data
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select sd_id, stu_uq_id, stu_info, stu_finger
+    from student_data
+  </select>
+</mapper>

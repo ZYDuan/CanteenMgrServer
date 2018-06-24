@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.OrderDishMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.OrderDish" >
+    <constructor >
+      <idArg column="order_dish_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish_cost" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_dish
+    where order_dish_id = #{orderDishId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.OrderDish" >
+    insert into order_dish (order_dish_id, order_id, dish, 
+      dish_num, dish_cost)
+    values (#{orderDishId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{dish,jdbcType=INTEGER}, 
+      #{dishNum,jdbcType=INTEGER}, #{dishCost,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.OrderDish" >
+    update order_dish
+    set order_id = #{orderId,jdbcType=INTEGER},
+      dish = #{dish,jdbcType=INTEGER},
+      dish_num = #{dishNum,jdbcType=INTEGER},
+      dish_cost = #{dishCost,jdbcType=INTEGER}
+    where order_dish_id = #{orderDishId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select order_dish_id, order_id, dish, dish_num, dish_cost
+    from order_dish
+    where order_dish_id = #{orderDishId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select order_dish_id, order_id, dish, dish_num, dish_cost
+    from order_dish
+  </select>
+</mapper>

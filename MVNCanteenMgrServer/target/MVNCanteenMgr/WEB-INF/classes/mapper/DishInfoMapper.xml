@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.DishInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.DishInfo" >
+    <constructor >
+      <idArg column="dish_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="dish_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dish_cost" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="dish_kind" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish_pic" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from dish_info
+    where dish_id = #{dishId,jdbcType=INTEGER}
+      and dish_name = #{dishName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.DishInfo" >
+    insert into dish_info (dish_id, dish_name, dish_cost, 
+      dish_kind, dish_pic)
+    values (#{dishId,jdbcType=INTEGER}, #{dishName,jdbcType=VARCHAR}, #{dishCost,jdbcType=REAL}, 
+      #{dishKind,jdbcType=INTEGER}, #{dishPic,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.DishInfo" >
+    update dish_info
+    set dish_cost = #{dishCost,jdbcType=REAL},
+      dish_kind = #{dishKind,jdbcType=INTEGER},
+      dish_pic = #{dishPic,jdbcType=VARCHAR}
+    where dish_id = #{dishId,jdbcType=INTEGER}
+      and dish_name = #{dishName,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select dish_id, dish_name, dish_cost, dish_kind, dish_pic
+    from dish_info
+    where dish_id = #{dishId,jdbcType=INTEGER}
+      and dish_name = #{dishName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select dish_id, dish_name, dish_cost, dish_kind, dish_pic
+    from dish_info
+  </select>
+</mapper>

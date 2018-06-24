@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.GradeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.GradeInfo" >
+    <constructor >
+      <idArg column="grade_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="grade_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from grade_info
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.GradeInfo" >
+    insert into grade_info (grade_id, grade_name)
+    values (#{gradeId,jdbcType=INTEGER}, #{gradeName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.GradeInfo" >
+    update grade_info
+    set grade_name = #{gradeName,jdbcType=VARCHAR}
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select grade_id, grade_name
+    from grade_info
+    where grade_id = #{gradeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select grade_id, grade_name
+    from grade_info
+  </select>
+</mapper>

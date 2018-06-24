@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.AdminInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.AdminInfo" >
+    <constructor >
+      <idArg column="admin_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="admin_account" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="admin_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_auz" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin_info
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.AdminInfo" >
+    insert into admin_info (admin_id, admin_account, admin_password, 
+      user_auz)
+    values (#{adminId,jdbcType=INTEGER}, #{adminAccount,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{userAuz,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.AdminInfo" >
+    update admin_info
+    set admin_account = #{adminAccount,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      user_auz = #{userAuz,jdbcType=INTEGER}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select admin_id, admin_account, admin_password, user_auz
+    from admin_info
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select admin_id, admin_account, admin_password, user_auz
+    from admin_info
+  </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.MenuDishMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.MenuDish" >
+    <constructor >
+      <idArg column="menu_dish_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="menu" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish_make" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dish_sold" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu_dish
+    where menu_dish_id = #{menuDishId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.MenuDish" >
+    insert into menu_dish (menu_dish_id, menu, dish, 
+      dish_make, dish_sold)
+    values (#{menuDishId,jdbcType=INTEGER}, #{menu,jdbcType=INTEGER}, #{dish,jdbcType=INTEGER}, 
+      #{dishMake,jdbcType=INTEGER}, #{dishSold,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.MenuDish" >
+    update menu_dish
+    set menu = #{menu,jdbcType=INTEGER},
+      dish = #{dish,jdbcType=INTEGER},
+      dish_make = #{dishMake,jdbcType=INTEGER},
+      dish_sold = #{dishSold,jdbcType=INTEGER}
+    where menu_dish_id = #{menuDishId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select menu_dish_id, menu, dish, dish_make, dish_sold
+    from menu_dish
+    where menu_dish_id = #{menuDishId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select menu_dish_id, menu, dish, dish_make, dish_sold
+    from menu_dish
+  </select>
+</mapper>

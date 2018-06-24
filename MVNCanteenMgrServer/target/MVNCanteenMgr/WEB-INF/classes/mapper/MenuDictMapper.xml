@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.MenuDictMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.MenuDict" >
+    <constructor >
+      <idArg column="m_dict_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kind_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu_dict
+    where m_dict_id = #{mDictId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.MenuDict" >
+    insert into menu_dict (m_dict_id, kind_name)
+    values (#{mDictId,jdbcType=INTEGER}, #{kindName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.MenuDict" >
+    update menu_dict
+    set kind_name = #{kindName,jdbcType=VARCHAR}
+    where m_dict_id = #{mDictId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select m_dict_id, kind_name
+    from menu_dict
+    where m_dict_id = #{mDictId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select m_dict_id, kind_name
+    from menu_dict
+  </select>
+</mapper>

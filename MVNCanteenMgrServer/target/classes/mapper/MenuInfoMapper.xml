@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.MenuInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.MenuInfo" >
+    <constructor >
+      <idArg column="menu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="menu_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="menu_kind" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="menu_activated" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu_info
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.MenuInfo" >
+    insert into menu_info (menu_id, menu_time, menu_kind, 
+      menu_activated)
+    values (#{menuId,jdbcType=INTEGER}, #{menuTime,jdbcType=TIMESTAMP}, #{menuKind,jdbcType=INTEGER}, 
+      #{menuActivated,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.MenuInfo" >
+    update menu_info
+    set menu_time = #{menuTime,jdbcType=TIMESTAMP},
+      menu_kind = #{menuKind,jdbcType=INTEGER},
+      menu_activated = #{menuActivated,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select menu_id, menu_time, menu_kind, menu_activated
+    from menu_info
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select menu_id, menu_time, menu_kind, menu_activated
+    from menu_info
+  </select>
+</mapper>

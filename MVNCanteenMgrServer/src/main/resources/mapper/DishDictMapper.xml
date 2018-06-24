@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.DishDictMapper" >
+  <resultMap id="BaseResultMap" type="com.ready.pojo.DishDict" >
+    <constructor >
+      <idArg column="kind_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="kind_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dish_dict
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.DishDict" >
+    insert into dish_dict (kind_id, kind_name)
+    values (#{kindId,jdbcType=INTEGER}, #{kindName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.DishDict" >
+    update dish_dict
+    set kind_name = #{kindName,jdbcType=VARCHAR}
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select kind_id, kind_name
+    from dish_dict
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select kind_id, kind_name
+    from dish_dict
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select kind_id, kind_name
+    from dish_dict
+    where kind_name = #{kindName}
+  </select>
+</mapper>

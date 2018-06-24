@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ready.dao.StudentOrderMapper">
+  <resultMap id="BaseResultMap" type="com.ready.pojo.StudentOrder">
+    <constructor>
+      <idArg column="order_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="student" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="menu" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_cost" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="order_finish" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ready.pojo.StudentOrder">
+    insert into student_order (order_id, student, menu, 
+      order_cost, order_time, order_finish
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{student,jdbcType=INTEGER}, #{menu,jdbcType=INTEGER}, 
+      #{orderCost,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, #{orderFinish,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ready.pojo.StudentOrder">
+    update student_order
+    set student = #{student,jdbcType=INTEGER},
+      menu = #{menu,jdbcType=INTEGER},
+      order_cost = #{orderCost,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_finish = #{orderFinish,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select order_id, student, menu, order_cost, order_time, order_finish
+    from student_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select order_id, student, menu, order_cost, order_time, order_finish
+    from student_order
+  </select>
+
+</mapper>

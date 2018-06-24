@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ready.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ready.pojo.UserInfo">
+        <constructor>
+            <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="user_account" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="user_password" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="user_auz" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+        </constructor>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ready.pojo.UserInfo">
+    insert into user_info (user_id, user_account, user_password, 
+      user_auz)
+    values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userAuz,jdbcType=INTEGER})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.ready.pojo.UserInfo">
+    update user_info
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_auz = #{userAuz,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select user_id, user_account, user_password, user_auz
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, user_account, user_password, user_auz
+    from user_info
+  </select>
+
+    <select id="selectByInfo" parameterType="map" resultMap="BaseResultMap">
+    select user_id, user_account, user_password, user_auz
+    from user_info
+    where user_account = #{account} and user_password = #{password}
+  </select>
+
+    <select id="findOneByName" resultMap="BaseResultMap">
+    select user_id, user_account, user_password, user_auz
+    from user_info
+    where user_account = #{account}
+    </select>
+</mapper>
